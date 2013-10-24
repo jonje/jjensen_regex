@@ -2,8 +2,8 @@ package edu.neumont.jjensen.labs.regex;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Iterator;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 public class RegexLab {
 
     private ArrayList<String> lines = new ArrayList<String>();
+
+
     public void begin() {
        /* try(BufferedReader fileReader = new BufferedReader(new FileReader(new File("/home/jjensen/Projects/Java/jjensen_regex/src/Fish.html")))) {
             String line = "";
@@ -40,35 +42,32 @@ public class RegexLab {
             while(fileReader.ready()) {
                 lines.add(fileReader.readLine());
             }
-            int numLoops = 0;
-            for(String line : lines) {
-                System.out.println(numLoops++);
-                printUrls(line);
-                //System.out.println(line);
-            }
-        } catch (FileNotFoundException io) {
-            io.printStackTrace();
-        } catch(IOException io) {
-            io.printStackTrace();
+            fileReader.close();
+
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+
+        } catch(IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+        /*for(String line : lines) {
+
+            UrlParsing.printUrls(line);
+            System.out.println(line);
+        } */
+
+        Iterator<String> stringIterator = lines.iterator();
+
+        while(stringIterator.hasNext()) {
+            String line = stringIterator.next();
+            UrlParsing.printUrls(line);
         }
 
 
 
     }
 
-    public void printUrls(String text) {
-        Pattern urlPattern = Pattern.compile("(\")(https?://)+([da-z.-]+).([a-z.]{2,6})([/a-zA-Z/?.-]*)*(\")");
 
-
-        Matcher matcher = urlPattern.matcher(text);
-
-        if(matcher.find()) {
-            System.out.println(matcher.group());
-        }
-
-
-
-
-    }
 
 }

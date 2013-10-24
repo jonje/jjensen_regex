@@ -13,15 +13,14 @@ public class UrlParsing {
 
     public static void printUrls(String text) {
         Pattern urlPattern = Pattern.compile("(\")(https?://)+([da-z.-]+).([a-z.]{2,6})([/a-zA-Z/?.-]*)*(\")");
-
-
         Matcher matcher = urlPattern.matcher(text);
 
-        if(matcher.find()) {
-            System.out.println(matcher.group());
+        while(matcher.find()) {
+            System.out.print(matcher.group());
+
         }
 
-
+        System.out.println("Not in loop");
 
 
     }
