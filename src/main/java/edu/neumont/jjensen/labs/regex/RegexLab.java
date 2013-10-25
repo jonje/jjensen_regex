@@ -13,18 +13,44 @@ import java.util.Iterator;
  */
 public class RegexLab {
 
-    private ArrayList<String> lines = new ArrayList<String>();
+    private ArrayList<String> fileLines;
 
+    public RegexLab() {
+        fileLines = new ArrayList<String>();
+    }
 
+    /**
+     * Starting point of the regexlab application loads in a file
+     * then prints out all of the urls contained in the document.
+     */
     public void begin() {
-       /* try(BufferedReader fileReader = new BufferedReader(new FileReader(new File("/home/jjensen/Projects/Java/jjensen_regex/src/Fish.html")))) {
-            String line = "";
+        loadFile("/home/jjensen/Projects/Java/jjensen_regex/src/Fish.html");
+        printAllUrls();
 
+    }
+
+    /**
+     * Prints out all the Urls it found in the collection
+     *
+     */
+    private void printAllUrls() {
+        for(String fileLine : fileLines) {
+            UrlParsing.printUrls(fileLine);
+        }
+    }
+
+    /**
+     * Loads the contents of a file line by line into a collection
+     * to be worked with later on.
+     * @param filePath
+     */
+    private void loadFile(String filePath) {
+        try(BufferedReader fileReader = new BufferedReader(new FileReader(new File(filePath)))) {
+
+            // Read the file when its ready to be read
+            // And add the lines to the collection of strings
             while(fileReader.ready()) {
-                line = fileReader.readLine();
-                UrlParsing.printUrls(line);
-                System.out.println("Still Running");
-                System.out.println(fileReader.ready());
+                fileLines.add(fileReader.readLine());
 
             }
 
@@ -34,37 +60,7 @@ public class RegexLab {
         } catch (IOException e) {
             e.printStackTrace();
 
-        }*/
-
-        try {
-            BufferedReader fileReader = new BufferedReader(new FileReader(new File("/home/jjensen/Projects/Java/jjensen_regex/src/Fish.html")));
-
-            while(fileReader.ready()) {
-                lines.add(fileReader.readLine());
-            }
-            fileReader.close();
-
-        } catch (FileNotFoundException fileNotFoundException) {
-            fileNotFoundException.printStackTrace();
-
-        } catch(IOException ioException) {
-            ioException.printStackTrace();
         }
-
-        /*for(String line : lines) {
-
-            UrlParsing.printUrls(line);
-            System.out.println(line);
-        } */
-
-        Iterator<String> stringIterator = lines.iterator();
-
-        while(stringIterator.hasNext()) {
-            String line = stringIterator.next();
-            UrlParsing.printUrls(line);
-        }
-
-
 
     }
 

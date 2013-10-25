@@ -11,17 +11,22 @@ import java.util.regex.Pattern;
  */
 public class UrlParsing {
 
+    /**
+     * Takes in a string then and determines if it meets the
+     * criteria of a url.  If it meets this criteria it will
+     * display the url to the console.
+     * @param text
+     */
     public static void printUrls(String text) {
-        Pattern urlPattern = Pattern.compile("(\")(https?://)+([da-z.-]+).([a-z.]{2,6})([/a-zA-Z/?.-]*)*(\")");
+        //Compile the pattern
+        Pattern urlPattern = Pattern.compile("(https?://)(www.)?([\\da-zA-Z.-]+).([a-z]{2,6})(/[/\\da-zA-Z?.-]*)");
         Matcher matcher = urlPattern.matcher(text);
 
+        //Find all the matches and print them out.
         while(matcher.find()) {
-            System.out.print(matcher.group());
+            System.out.println(matcher.group());
 
         }
-
-        System.out.println("Not in loop");
-
 
     }
 
