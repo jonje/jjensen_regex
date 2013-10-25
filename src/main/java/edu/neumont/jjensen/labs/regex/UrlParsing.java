@@ -19,12 +19,14 @@ public class UrlParsing {
      */
     public static void printUrls(String text) {
         //Compile the pattern
-        Pattern urlPattern = Pattern.compile("(https?://)(www.)?([\\da-zA-Z.-]+).([a-z]{2,6})(/[/\\da-zA-Z?.-]*)");
+        Pattern urlPattern = Pattern.compile("(\")(?<url>(https?://)(?<domain>(www.)?([\\da-zA-Z.-]+).([a-z]{2,6}))(?<path>(/[/\\da-zA-Z?.-]*)))(\")");
         Matcher matcher = urlPattern.matcher(text);
 
         //Find all the matches and print them out.
         while(matcher.find()) {
-            System.out.println(matcher.group());
+            System.out.println("Url: " + matcher.group("url"));
+            System.out.println("Domain: " + matcher.group("domain"));
+            System.out.println("Path: " + matcher.group("path") + "\n");
 
         }
 
